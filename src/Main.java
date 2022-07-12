@@ -15,7 +15,7 @@ public class Main {
         example.insert(92);
         /*PreOrder Traversal root-->left-->right*/
         System.out.println("PreOrder Traversal = ");
-        example.preOrder(example.root);
+        example.reursivePreOrder(example.root);
         /*Inorder traversal left --> root-->right*/
         System.out.println("Inorder Traversal = ");
         example.inOrder(example.root);
@@ -24,11 +24,18 @@ public class Main {
         example.postOrder(example.root);
         /*Inserting values*/
         System.out.println("Insert = ");
-
-        example.insert(example.root,50);
+        example.insert(example.root, 50);
         System.out.println("New PreOrder Traversal = ");
-        example.preOrder(example.root);
-
-
+        example.reursivePreOrder(example.root);
+        /*Finding maximum value*/
+        System.out.println("Maximum value in the tree is " + example.findMax(example.root));
+        System.out.println("Minimum value in the tree is " + example.findMin(example.root));
+        /*Searching values*/
+        int number = 50;
+        if (example.search(number) != null) {
+            System.out.println(number+" found.");
+        } else {
+            System.out.println(number+" not found.");
+        }
     }
 }

@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 class BSTree {
     TreeNode root;
 
@@ -10,40 +12,30 @@ class BSTree {
             this.data = mydata;
         }
     }
+    public TreeNode getLeft() {
+        return root.left;
+    }
 
-    /*public void createBinaryTree() {
-        TreeNode first = new TreeNode(1);
-        TreeNode second = new TreeNode(2);
-        TreeNode third = new TreeNode(3);
-        TreeNode fourth = new TreeNode(4);
-        TreeNode fifth = new TreeNode(5);
-        TreeNode six = new TreeNode(6);
-        TreeNode seven = new TreeNode(7);
-        TreeNode eight = new TreeNode(8);
-        TreeNode nine = new TreeNode(9);
-        TreeNode ten = new TreeNode(10);
+    /* Function to get right node */
+    public TreeNode getRight() {
+        return root.right;
+    }
 
-        root = first;
-        first.left = second;
-        first.right = third;
+    /* Function to set data to node */
+    public void setData(int d) {
+        root.data = d;
+    }
 
-        second.left = fourth;
-        second.right = fifth;
-
-        third.left = six;
-        third.right = seven;
-
-        fourth.left = eight;
-        fourth.right = nine;
-
-        fifth.left = ten;
-
-    }*/
+    /* Function to get data from node */
+    public int getData() {
+        return root.data;
+    }
 
     /*Putting in values*/
-    public void insert(int value){
-        root = insert(root,value);
+    public void insert(int value) {
+        root = insert(root, value);
     }
+
     /*Insert in Binary search tree*/
     public TreeNode insert(TreeNode root, int value) {
         if (root == null) {
@@ -57,14 +49,35 @@ class BSTree {
         }
         return root;
     }
-    /*PreOrder Traversal*/
-    public void preOrder(TreeNode root) {
+
+
+    /*Recursive PreOrder Traversal*/
+    public void reursivePreOrder(TreeNode root) {
         if (root == null) {
             return;
         }
         System.out.println(root.data);
-        preOrder(root.left);
-        preOrder(root.right);
+        reursivePreOrder(root.left);
+        reursivePreOrder(root.right);
+    }
+
+    /*Iterative PreOrder Traversal*/
+    public void iterativePreOrder(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode temp = stack.pop();
+            System.out.println(temp.data);
+            if (temp.right != null) {
+                stack.push(temp.right);
+            }
+            if (temp.left != null) {
+                stack.push(temp.left);
+            }
+        }
     }
 
     /*InOrder Traversal*/
@@ -73,7 +86,7 @@ class BSTree {
             return;
         }
         inOrder(root.left);
-        System.out.println(root.data + " ");
+        System.out.println(root.data);
         inOrder(root.right);
     }
 
@@ -87,7 +100,62 @@ class BSTree {
         System.out.println(root.data);
     }
 
+    /*Finding maximum value*/
+    public int findMax() {
+        return findMax(root);
+    }
 
+    public int findMax(TreeNode root) {
+        if (root == null) {
+            return Integer.MIN_VALUE;
+        }
+        int result = root.data;
+        int left = findMax(root.left);
+        int right = findMax(root.right);
+        if (left > result) {
+            result = left;
+        }
+        if (right > result) {
+            result = right;
+        }
+        return result;
+    }
 
-    /*Search in Binary Tree*/
+    public int findMin(){
+        return findMin(root);
+    }
+
+    public int findMin(TreeNode root){
+        if (root==null){
+            return 101001010;
+        }
+        int result = root.data;
+        int leftData = findMin(root.left);
+        int rightData = findMin(root.right);
+        if (result>leftData){
+            result = leftData;
+        }
+        if (result>rightData){
+            result = rightData;
+        }
+        return result;
+    }
+
+    /*Searching a particular key*/
+    public TreeNode search(int key) {
+        return search(root, key);
+    }
+
+    public TreeNode search(TreeNode root, int key) {
+        if (root == null || root.data == key) {
+            return root;
+        }
+        if (key < root.data) {
+            return search(root.left, key);
+        } else {
+            return search(root.right, key);
+        }
+    }
+    /*Deleting a node*/
+
 }
