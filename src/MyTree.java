@@ -22,7 +22,7 @@ class MyTree {
             root = new TreeNode(value);
             return root;
         }
-        if (value <= root) {
+        if (value <= root.data) {
             root.left = insert(root.left, value);
         } else {
             root.right = insert(root.right, value);
